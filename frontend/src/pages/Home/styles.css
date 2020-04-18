@@ -59,8 +59,9 @@
 .jobs ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    justify-items: self-start;
     grid-gap: 20px;
+    margin-left: 200px;
 }
 
 .jobs ul li {

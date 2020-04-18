@@ -1,19 +1,20 @@
 const express = require('express');
 const app = express();
 const db = require('./db/connection');
-const bodyParser = require('body-parser');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const Job = require("./models/Job")
+const Job = require("./models/Job");
+const Cors = require('cors');
 
-const PORT = 3000;
+const PORT = 3333;
 
 app.listen(PORT, function () {
     console.log(`O express está rodando na porta ${PORT}`)
 });
 
-// body parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(Cors());
+
+app.use(express.json());
 
 // db connection
 db

@@ -1,25 +1,37 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import './styles.css'
 
-export default function New(){
-    return(
+import api from '../../services/api';
+
+
+export default function New() {
+    const {id} = useParams();
+    const [job, setJob] = useState([]);
+
+    useEffect(() => {
+        api.get(`/jobs/view/${id}`, {
+        }).then(response => {
+            setJob(response.data);
+        })
+    }, []);
+
+    return (
         <div className="new-job-container">
             <div className="content">
                 <section>
-                    <h1>Cadastrar nova vaga</h1>
-                    <p>Descreva sua vaga detalhadamente.</p>
+                    <h1>Job Finder</h1>
                     <Link className="link" to="/">
                         Voltar para home
                     </Link>
                 </section>
                 <section>
-                    <h2>Programador</h2>
-                    <p>Vaga para programador C# com experiência.</p>
-                    <i>R$ 4000</i>
-                    <p>BNE</p>
-                    <p>email@email.com</p>
+                    <h2>{job.title}</h2>
+                <p>{job.description}</p>
+                    <i>{Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(job.salary)}</i>
+                    <p>{job.company}</p>
+                    <p>{job.email}</p>
                 </section>
             </div>
         </div>

@@ -27,6 +27,7 @@ router.post('/add', (req, res) => {
         email,
         new_job
     })
+        .then(res.json( ))
         .catch(err => console.log(err));
 });
 
